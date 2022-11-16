@@ -27,7 +27,6 @@ export default function BasicModal() {
         let readObject = readingDataFromLocalStorage(inpExpData);
         arrayOfInpData.push(readObject);
         localStorage.setItem("arrayOfExpData", JSON.stringify(arrayOfInpData));
-
         document.getElementById("filled-basic").value = "";
         document.getElementById("outlined-basic").value = "";
         document.getElementById("outlined-number").value = "";

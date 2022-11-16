@@ -23,6 +23,9 @@ const style = {
 
 
 const ProductModal = ({ open, setOpen, handleClose, handleSubmit, des, amt, noOfPeople }) => {
+    const [description, setDescription] = React.useState(des);
+    const [amount, setAmount] = React.useState(amt);
+    const [noOfPeoples, setNoOfPeoples] = React.useState(noOfPeople);
     return (
         <Modal
             open={open}
@@ -40,13 +43,13 @@ const ProductModal = ({ open, setOpen, handleClose, handleSubmit, des, amt, noOf
                     </Toolbar>
                 </AppBar>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <TextField id="filled-basic" label="Description" placeholder='Description of Products..' autoComplete='Off' variant="filled" sx={{ width: '25.75vw', mt: '2vh' }} value={des} />
+                    <TextField id="filled-basic" label="Description" placeholder='Description of Products..' autoComplete='Off' variant="filled" sx={{ width: '25.75vw', mt: '2vh' }} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                 </Typography>
                 <Typography id="modal-modal-description" >
-                    <TextField id="outlined-basic" placeholder='Enter Amount here...' label=<CurrencyRupeeIcon /> sx={{ width: '25.75vw', mt: '3vh' }} value={amt} />
+                    <TextField id="outlined-basic" placeholder='Enter Amount here...' label=<CurrencyRupeeIcon /> sx={{ width: '25.75vw', mt: '3vh' }} value={amount} onChange={(e) => { setAmount(e.target.value) }} />
                 </Typography>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <TextField id="outlined-number" placeholder='Enter Number Of People' label="NO. Of People" type="number" InputLabelProps={{ shrink: true, }} sx={{ width: '25.75vw', mt: '3vh' }} value={noOfPeople} />
+                    <TextField id="outlined-number" placeholder='Enter Number Of People' label="NO. Of People" type="number" InputLabelProps={{ shrink: true, }} sx={{ width: '25.75vw', mt: '3vh' }} value={noOfPeoples} onChange={(e) => { setNoOfPeoples(e.target.value) }} />
                 </Typography>
                 <a href="/"> <Button variant="contained" sx={{ m: '2vh', px: '4vh', mt: '3vh' }} onClick={handleSubmit}>Save</Button></a>
             </Box>

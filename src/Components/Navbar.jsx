@@ -18,15 +18,27 @@ import OwedButton from './OwedAmount';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+const { useState } = React;
+
+const navStyleObj = {
+    mr: 2,
+    display: { xs: 'none', md: 'flex' },
+    fontFamily: 'monospace',
+    fontWeight: 700,
+    fontSize: '3.5vw',
+    color: 'inherit',
+    textDecoration: 'none',
+}
+
 function Navbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const [returnData, setReturnData] = React.useState(false);
-    const [oweData, setOwedData] = React.useState(false);
+    const [returnData, setReturnData] = useState(false);
+    const [oweData, setOwedData] = useState(false);
 
-    const [totalReturnAmt, setTotalReturnAmt] = React.useState(0);
-    const [totalOweAmt, setTotalOwedAmt] = React.useState(0);
+    const [totalReturnAmt, setTotalReturnAmt] = useState(0);
+    const [totalOweAmt, setTotalOwedAmt] = useState(0);
 
 
 
@@ -87,15 +99,7 @@ function Navbar() {
                         noWrap
                         component="a"
                         href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            fontSize: '3.5vw',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        sx={navStyleObj}
                     >
                         Expenses
                     </Typography>

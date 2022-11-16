@@ -21,20 +21,21 @@ export default function BasicGrid() {
 
     const [index, setIndex] = React.useState(0);
     const [openUpdateModal, setUpdateOpenModal] = React.useState(false);
-
+    // const [cardDetails, setCardDetails] = useState({des:"",amt: 0,noOfPeople:0})
     const [des, setDes] = React.useState("");
     const [amt, setAmt] = React.useState(0);
     const [noOfPeople, setNoOfPeople] = React.useState(0);
 
     const setOpen = (indx) => {
         setIndex(indx);
+        setDes(arrayOfExpShowData[indx].des);
+        setAmt(arrayOfExpShowData[indx].amt);
+        setNoOfPeople(arrayOfExpShowData[indx].noOfPeople);
         setUpdateOpenModal(true);
-        setDes(arrayOfExpShowData[index].des);
-        setAmt(arrayOfExpShowData[index].amt);
-        setNoOfPeople(arrayOfExpShowData[index].noOfPeople);
     }
 
-    const handleUpdateModalClose = () => {
+    const handleUpdateModalClose = (e) => {
+        e.preventDefault();
         setUpdateOpenModal(false)
     }
 
@@ -54,11 +55,11 @@ export default function BasicGrid() {
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={4}>
                 {arrayOfExpShowData.map((elem, index) => {
-                    return <Grid item xs={3} sx={{ mt: '2vh' }}>
+                    return <Grid item xs={3} sx={{ mt: '2vh' }} key={index}>
                         <Item sx={{ backgroundColor: '#ffa726', borderRadius: 8 }}>
                             <h1>{elem.des} </h1>
                             <h3 style={{ marginTop: '2vh', fontSize: '2vw' }} >Amount: <CurrencyRupeeIcon />{Number.parseFloat(elem.amt).toFixed(2)}</h3>
-                            <p style={{ marginTop: '2vh', fontSize: '1.2vw' }} >You Paid :   <span style={{ color: 'brown' }}> <b> ₹ {Number.parseFloat(elem.amt).toFixed(2)}</b>  </span> <br /> it gets split into <span style={{ color: 'brown' }}> <b>{elem.noOfPeople} </b>  </span> people equally i.e. <span style={{ color: 'brown' }}> <b> ₹ {Number.parseFloat(elem.amt).toFixed(2) / elem.noOfPeople} </b>  </span> Each. <br /> You get from others <span style={{ color: 'brown' }}> <b> {Number.parseFloat(elem.amt).toFixed(2) - Number.parseFloat(elem.amt).toFixed(2) / elem.noOfPeople}</b>  </span></p>
+                            <p style={{ marginTop: '2vh', fontSize: '1.2vw' }} >You Paid :   <span style={{ color: 'brown' }}> <b> ₹ {Number.parseFloat(elem.amt).toFixed(2)}</b>  </span> <br /> it gets split into <span style={{ color: 'brown' }}> <b>{elem.noOfPeople} </b>  </span> people equally i.e. <span style={{ color: 'brown' }}> <b> ₹  {Number.parseFloat(elem.amt / elem.noOfPeople).toFixed(2)} </b>  </span> Each. <br /> You get from others <span style={{ color: 'brown' }}> <b> {Number.parseFloat(elem.amt - elem.amt / elem.noOfPeople).toFixed(2)}</b>  </span></p>
                             <Button style={{ marginTop: '3vh', backgroundColor: '#e65100', color: '#222', borderTopLeftRadius: 25, borderBottomRightRadius: 24 }} onClick={() => setOpen(index)}>Edit & Save</Button>
                         </Item>
                     </Grid>
@@ -66,7 +67,7 @@ export default function BasicGrid() {
             </Grid>
             {
                 openUpdateModal &&
-                <UpdateProductModal open={openUpdateModal} setOpen={setUpdateOpenModal} handleClose={handleUpdateModalClose} handleSubmit={handleSubmit} des={des} amt={amt} noOfPeople={noOfPeople} />
+                <UpdateProductModal open={openUpdateModal} setOpen={setUpdateOpenModal} handleClose={handleUpdateModalClose} handleSubmit={handleSubmit} des={des} amt={amt} noOfPeople={noOfPeople} f={console.log(des, amt, noOfPeople)} />
             }
         </Box>
     );
