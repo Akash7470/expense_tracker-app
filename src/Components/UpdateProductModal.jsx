@@ -1,60 +1,112 @@
 import React from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import CancelIcon from '@mui/icons-material/Cancel';
-
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
 };
 
+const ProductModal = ({ props }) => {
+  const [description, setDescription] = React.useState(props.des);
+  const [amount, setAmount] = React.useState(props.amt);
+  const [noOfPeoples, setNoOfPeoples] = React.useState(props.noOfPeople);
 
-const ProductModal = ({ open, setOpen, handleClose, handleSubmit, des, amt, noOfPeople }) => {
-    const [description, setDescription] = React.useState(des);
-    const [amount, setAmount] = React.useState(amt);
-    const [noOfPeoples, setNoOfPeoples] = React.useState(noOfPeople);
-    return (
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box sx={style}>
-                <AppBar position="static" sx={{ width: '25.75vw', }}>
-                    <Toolbar variant="dense" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Add Your Expenses here...
-                        </Typography>
-                        <a href="/"> <CancelIcon sx={{ color: '#222' }} onClick={() => setOpen(false)} /></a>
-                    </Toolbar>
-                </AppBar>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <TextField id="filled-basic" label="Description" placeholder='Description of Products..' autoComplete='Off' variant="filled" sx={{ width: '25.75vw', mt: '2vh' }} value={description} onChange={(e) => { setDescription(e.target.value) }} />
-                </Typography>
-                <Typography id="modal-modal-description" >
-                    <TextField id="outlined-basic" placeholder='Enter Amount here...' label=<CurrencyRupeeIcon /> sx={{ width: '25.75vw', mt: '3vh' }} value={amount} onChange={(e) => { setAmount(e.target.value) }} />
-                </Typography>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <TextField id="outlined-number" placeholder='Enter Number Of People' label="NO. Of People" type="number" InputLabelProps={{ shrink: true, }} sx={{ width: '25.75vw', mt: '3vh' }} value={noOfPeoples} onChange={(e) => { setNoOfPeoples(e.target.value) }} />
-                </Typography>
-                <a href="/"> <Button variant="contained" sx={{ m: '2vh', px: '4vh', mt: '3vh' }} onClick={handleSubmit}>Save</Button></a>
-            </Box>
-        </Modal>
-    )
-}
+  return (
+    <Modal
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <AppBar position="static" sx={{ width: "25.75vw" }}>
+          <Toolbar
+            variant="dense"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Add Your Expenses here...
+            </Typography>
+            <a href="/">
+              {" "}
+              <CancelIcon
+                sx={{ color: "#222" }}
+                onClick={() => props.setOpen(false)}
+              />
+            </a>
+          </Toolbar>
+        </AppBar>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          <TextField
+            id="filled-basic"
+            label="Description"
+            placeholder="Description of Products.."
+            autoComplete="Off"
+            variant="filled"
+            sx={{ width: "25.75vw", mt: "2vh" }}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+        </Typography>
+        <Typography id="modal-modal-description">
+          <TextField
+            id="outlined-basic"
+            placeholder="Enter Amount here..."
+            label=<CurrencyRupeeIcon />
+            sx={{ width: "25.75vw", mt: "3vh" }}
+            value={amount}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+          />
+        </Typography>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          <TextField
+            id="outlined-number"
+            placeholder="Enter Number Of People"
+            label="NO. Of People"
+            type="number"
+            InputLabelProps={{ shrink: true }}
+            sx={{ width: "25.75vw", mt: "3vh" }}
+            value={noOfPeoples}
+            onChange={(e) => {
+              setNoOfPeoples(e.target.value);
+            }}
+          />
+        </Typography>
+        <a href="/">
+          {" "}
+          <Button
+            variant="contained"
+            sx={{ m: "2vh", px: "4vh", mt: "3vh" }}
+            onClick={props.handleSubmit}
+          >
+            Save
+          </Button>
+        </a>
+      </Box>
+    </Modal>
+  );
+};
 
-export default ProductModal
+export default ProductModal;
